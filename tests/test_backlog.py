@@ -62,6 +62,30 @@ def test_user_stories_referencees_existent(backlog):
         assert ref in contenu, f"{correspondances[0].name} ne mentionne pas {ref}"
 
 
+def test_rang_et_score_declares_dans_les_user_stories(backlog):
+    """Le rang et le score RICE affiches en tete de chaque user story
+    doivent correspondre au backlog trie par score decroissant."""
+    import re
+
+    tri = sorted(backlog["cas_usage"], key=lambda c: c["rice"]["score"], reverse=True)
+    rang_par_id = {cu["id"]: i + 1 for i, cu in enumerate(tri)}
+    score_par_id = {cu["id"]: cu["rice"]["score"] for cu in tri}
+    motif = re.compile(
+        r"\*\*Cas d'usage\*\* : (CU-\d{2}).*\*\*Priorite RICE\*\* : ([0-9.]+) \(rang (\d+)\)"
+    )
+    for fichier in sorted((RACINE / "user-stories").glob("US-*.md")):
+        m = motif.search(fichier.read_text(encoding="utf-8"))
+        assert m, f"{fichier.name}: en-tete 'Cas d'usage / Priorite RICE (rang N)' introuvable"
+        cu_id, score, rang = m.group(1), float(m.group(2)), int(m.group(3))
+        assert cu_id in rang_par_id, f"{fichier.name}: {cu_id} absent du backlog"
+        assert score == pytest.approx(score_par_id[cu_id], abs=0.01), (
+            f"{fichier.name}: score declare {score}, backlog {score_par_id[cu_id]}"
+        )
+        assert rang == rang_par_id[cu_id], (
+            f"{fichier.name}: rang declare {rang}, rang reel {rang_par_id[cu_id]}"
+        )
+
+
 def test_user_stories_structurees():
     sections = [
         "## Regles de gestion",

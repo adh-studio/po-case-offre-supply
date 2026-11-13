@@ -55,7 +55,7 @@ cd po-case-offre-supply
 ./run_e2e.sh
 ```
 
-`run_e2e.sh` cree le venv, installe les dependances epinglees, regenere `docs/index.html` et execute les 10 tests pytest.
+`run_e2e.sh` cree le venv, installe les dependances epinglees, regenere `docs/index.html` et execute la suite pytest complete (11 tests).
 
 ## Ce que ce projet demontre pour un role de Product Owner Data & IA
 

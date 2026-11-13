@@ -2,8 +2,8 @@
 # Priorisation RICE : score = reach * impact * confidence / effort
 # Conventions :
 #   reach      : nombre de personnes touchees par trimestre (utilisateurs metier directs)
-#   impact     : echelle Intercom (0.25 minime, 0.5 faible, 1 moyen, 2 fort, 3 massif)
-#   confidence : 0.5 faible, 0.7 moyenne, 0.8 bonne, 0.9 forte, 1.0 certaine
+#   impact     : echelle Intercom etendue (0.25 minime, 0.5 faible, 1 moyen, 1.5 soutenu, 2 fort, 3 massif)
+#   confidence : entre 0.5 (faible) et 1.0 (certaine), par pas de 0.1
 #   effort     : personnes-mois (equipe Data Analyse + Data Science + PO)
 
 produit: "Data & IA Offre et Supply"

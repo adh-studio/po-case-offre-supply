@@ -1,6 +1,6 @@
 # US-003 : Generation assistee de fiches produits e-commerce par IA generative
 
-**Cas d'usage** : CU-03 | **Categorie** : IA | **Priorite RICE** : 7.88 (rang 5)
+**Cas d'usage** : CU-03 | **Categorie** : IA | **Priorite RICE** : 7.88 (rang 6)
 
 ## Recit utilisateur
 
