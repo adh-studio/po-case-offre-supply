@@ -1,0 +1,224 @@
+# Backlog produit Data & IA : domaine Offre et Supply, Maison Harena
+# Priorisation RICE : score = reach * impact * confidence / effort
+# Conventions :
+#   reach      : nombre de personnes touchees par trimestre (utilisateurs metier directs)
+#   impact     : echelle Intercom (0.25 minime, 0.5 faible, 1 moyen, 2 fort, 3 massif)
+#   confidence : 0.5 faible, 0.7 moyenne, 0.8 bonne, 0.9 forte, 1.0 certaine
+#   effort     : personnes-mois (equipe Data Analyse + Data Science + PO)
+
+produit: "Data & IA Offre et Supply"
+enseigne: "Maison Harena"
+version: "1.0"
+
+cas_usage:
+  - id: CU-01
+    titre: "Dashboard taux de rupture magasins et e-commerce"
+    categorie: Analytics
+    description: >
+      Tableau de bord self-service du taux de rupture par reference, famille
+      (canapes, luminaires, vaisselle, tapis, rangement), magasin et entrepot,
+      rafraichi quotidiennement, avec drill-down jusqu'a la reference.
+    rice:
+      reach: 120
+      impact: 2
+      confidence: 0.8
+      effort: 2
+      score: 96.0
+    valeur_metier: >
+      Recuperation estimee de 30 % des 2,1 M EUR de CA manque par an lies aux
+      ruptures non detectees, soit environ 630 k EUR par an.
+    dependances_data:
+      - dp_ventes_quotidiennes
+      - dp_stock_magasins_entrepots
+      - dp_referentiel_produits
+    user_story: US-001
+
+  - id: CU-02
+    titre: "Alerte reapprovisionnement automatique avec point de commande dynamique"
+    categorie: Automatisation
+    description: >
+      Calcul quotidien du point de commande par reference et par site a partir
+      de la demande recente et des delais fournisseurs, et emission d'alertes
+      de reapprovisionnement proposees a la validation des approvisionneurs.
+    rice:
+      reach: 90
+      impact: 2
+      confidence: 0.8
+      effort: 3
+      score: 48.0
+    valeur_metier: >
+      Reduction visee de 30 % des ruptures sur les references permanentes et
+      de 15 % du surstock saisonnier, soit environ 400 k EUR de capital libere.
+    dependances_data:
+      - dp_ventes_quotidiennes
+      - dp_stock_magasins_entrepots
+      - dp_delais_fournisseurs
+    user_story: US-002
+
+  - id: CU-03
+    titre: "Generation assistee de fiches produits e-commerce par IA generative"
+    categorie: IA
+    description: >
+      Brouillons de fiches produits (descriptif, points forts, conseils
+      d'entretien) generes par un LLM a partir des donnees fournisseur
+      structurees, avec garde-fous et validation humaine systematique avant
+      toute publication.
+    rice:
+      reach: 15
+      impact: 3
+      confidence: 0.7
+      effort: 4
+      score: 7.88
+    valeur_metier: >
+      Delai de mise en ligne d'une fiche ramene de 18 a moins de 5 jours,
+      environ 1 200 heures de redaction economisees par an, mise en vente web
+      des collections saisonnieres sans decalage avec le magasin.
+    dependances_data:
+      - dp_referentiel_produits
+      - dp_donnees_fournisseurs
+      - dp_fiches_publiees_historique
+    user_story: US-003
+
+  - id: CU-04
+    titre: "Prevision de la demande saisonniere par famille de produits"
+    categorie: IA
+    description: >
+      Modele de prevision probabiliste de la demande a 13 semaines par famille
+      et par region, integrant saisonnalite forte de la decoration (fetes,
+      rentree, soldes) pour eclairer les achats de collections.
+    rice:
+      reach: 25
+      impact: 3
+      confidence: 0.6
+      effort: 6
+      score: 7.5
+    valeur_metier: >
+      Meilleur calibrage des volumes d'achat des collections saisonnieres,
+      objectif de -25 % de capital immobilise en surstock de fin de saison.
+    dependances_data:
+      - dp_ventes_quotidiennes
+      - dp_calendrier_commercial
+      - dp_referentiel_produits
+
+  - id: CU-05
+    titre: "Scorecard fournisseurs : fiabilite, delais et OTIF"
+    categorie: Analytics
+    description: >
+      Suivi par fournisseur du taux de service OTIF, des ecarts de delais et
+      des litiges de reception, pour objectiver les revues fournisseurs
+      trimestrielles des acheteurs.
+    rice:
+      reach: 20
+      impact: 2
+      confidence: 0.8
+      effort: 2
+      score: 16.0
+    valeur_metier: >
+      Negociations appuyees sur des faits, reduction visee de 20 % des retards
+      de livraison des 30 fournisseurs principaux.
+    dependances_data:
+      - dp_commandes_fournisseurs
+      - dp_receptions_entrepots
+      - dp_litiges_reception
+
+  - id: CU-06
+    titre: "Optimisation des stocks multi-entrepots"
+    categorie: IA
+    description: >
+      Recommandation de repartition des stocks entre les 3 entrepots et les 45
+      magasins en fonction de la demande locale prevue, des couts de transport
+      et des contraintes de volume (meubles encombrants).
+    rice:
+      reach: 12
+      impact: 3
+      confidence: 0.6
+      effort: 5
+      score: 4.32
+    valeur_metier: >
+      Reduction des transferts inter-sites d'urgence (couteux sur les produits
+      volumineux) et baisse visee de 10 % des couts logistiques aval.
+    dependances_data:
+      - dp_stock_magasins_entrepots
+      - dp_previsions_demande
+      - dp_couts_transport
+
+  - id: CU-07
+    titre: "Automatisation du traitement des litiges de reception"
+    categorie: Automatisation
+    description: >
+      Rapprochement automatique commande, bon de livraison et reception,
+      detection des ecarts (quantite, casse, reference erronee) et preparation
+      du dossier de litige transmis a l'acheteur pour decision.
+    rice:
+      reach: 30
+      impact: 1.5
+      confidence: 0.8
+      effort: 2
+      score: 18.0
+    valeur_metier: >
+      Division par trois du delai de traitement d'un litige, recuperation plus
+      rapide des avoirs fournisseurs, estimee a 180 k EUR par an.
+    dependances_data:
+      - dp_commandes_fournisseurs
+      - dp_receptions_entrepots
+
+  - id: CU-08
+    titre: "Tableau de bord empreinte carbone transport amont"
+    categorie: Analytics
+    description: >
+      Consolidation des emissions de CO2e des flux fournisseurs vers entrepots
+      par mode de transport, rapprochee des volumes d'achat, pour integrer le
+      critere carbone dans les decisions de sourcing.
+    rice:
+      reach: 18
+      impact: 1
+      confidence: 0.7
+      effort: 2
+      score: 6.3
+    valeur_metier: >
+      Visibilite carbone au moment des arbitrages d'achat, contribution aux
+      engagements RSE publics de l'enseigne et au rapport extra-financier.
+    dependances_data:
+      - dp_flux_transport_amont
+      - dp_commandes_fournisseurs
+      - dp_facteurs_emission
+
+  - id: CU-09
+    titre: "Controle qualite continu du referentiel produits"
+    categorie: Automatisation
+    description: >
+      Controles automatises adosses aux data contracts du referentiel :
+      doublons, dimensions manquantes, categories incoherentes, photos
+      absentes, avec file de correction priorisee pour l'equipe Offre.
+    rice:
+      reach: 40
+      impact: 2
+      confidence: 0.9
+      effort: 1
+      score: 72.0
+    valeur_metier: >
+      Suppression des trois jours de nettoyage prealables a chaque analyse
+      d'assortiment, fiabilisation de tous les cas d'usage avals.
+    dependances_data:
+      - dp_referentiel_produits
+      - dp_donnees_fournisseurs
+
+  - id: CU-10
+    titre: "Assistant de sourcing responsable : scoring RSE matieres et certificats"
+    categorie: IA
+    description: >
+      Extraction assistee par IA des certificats matieres (bois FSC, textiles
+      recycles) depuis les documents fournisseurs, consolidation en un score
+      RSE par produit, verification humaine des extractions avant publication.
+    rice:
+      reach: 10
+      impact: 2
+      confidence: 0.5
+      effort: 3
+      score: 3.33
+    valeur_metier: >
+      Preparation du rapport RSE ramenee de six semaines a une semaine,
+      argumentaire sourcing responsable fiabilise pour le commerce.
+    dependances_data:
+      - dp_documents_fournisseurs
+      - dp_referentiel_produits
